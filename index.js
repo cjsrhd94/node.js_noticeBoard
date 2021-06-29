@@ -5,7 +5,10 @@ const port = 3000;
 const connect = require('./schemas')
 connect();
 
-app.use(express.urlencoded({extended: false}));
+const mongoose = require('mongoose');
+const noticeBoard = require('./schemas/noticeBoard');
+
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static('public'));
 
@@ -23,23 +26,23 @@ app.get('/', async (req, res) =>{
 })
 
 app.get('/detail', async (req, res) =>{
-    const detailPage = await noticeBoard.find()
+    const detailPage = await noticeBoard.find({_id : Object.keys(req.query)[0]})
     res.render('detail', {detailPage})
-    console.log(detailPage)
+    // console.log(detailPage)
+    // console.log(Object.keys(req.query)[0])
 })
 
-app.get('/editing/:id', async(req, res) =>{
-    const editingPage = await noticeBoard.findOne({_id:req.params.id})
+app.get('/editing', async(req, res) =>{
+    const editingPage = await noticeBoard.find({_id : Object.keys(req.query)[0]})
     res.render('editing', {editingPage})
-    console.log(editingPage)
+    // const editingPage = await noticeBoard.findOne({_id:req.params.id})
+    // res.render('editing', {editingPage})
+    // console.log(editingPage)
 })
 
 app.get('/writing', (req, res) =>{
     res.render('writing')
 })
-
-const mongoose = require('mongoose');
-const noticeBoard = require('./schemas/noticeBoard');
 
 //포트 접속 확인
 app.listen(port, () => {

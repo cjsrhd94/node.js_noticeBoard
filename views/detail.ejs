@@ -5,29 +5,29 @@
     <title>상세 조회 페이지</title>
 </head>
 <body>
-    <h1>상세 조회 페이지</h1>
-    <form>
-        <ul>
-            <li>
-                <label>제목</label>
-                <p>
-                    <%= detailPage.title%>
-                </p>
-            </li>
-            <li>
-                <label>작성자</label>
-                <p>
-                    <%= detailPage.writer%>
-                </p>
-            </li>
-            <li>
-                <label>내용</label>
-                <p>
-                    <%= detailPage.contents%>
-                </p>
-            </li>
-        </ul>
+    <form action = "/editing" method = "get">
+        <h1>상세 조회 페이지</h1>
+            <ul>
+                <li>
+                    <label>제목</label>
+                    <p>
+                        <%= detailPage[0].title%>
+                    </p>
+                </li>
+                <li>
+                    <label>작성자</label>
+                    <p>
+                        <%= detailPage[0].writer%>
+                    </p>
+                </li>
+                <li>
+                    <label>내용</label>
+                    <p>
+                        <%= detailPage[0].contents%>
+                    </p>
+                </li>
+            </ul>
+        <button type="submit" name="<%= detailPage[0]._id%>">수정 하기</button>
     </form>
-    <button onclick="location.href = '/editing/:id'">수정 하기</button>
 </body>
 </html>

@@ -10,23 +10,24 @@
         <ul>
             <li>
                 <label>제목</label>
-                <input type="text" value="<%= editingPage.title%>">
+                <input type="text" name = "title" value="<%= editingPage[0].title%>">
             </li>
             <li>
                 <label>작성자</label>
-                <input type="text" value="<%= editingPage.writer%>">
+                <input type="text" name = "writer" value="<%= editingPage[0].writer%>">
             </li>
             <li>
                 <label>내용</label>
-                <input type="text" value="<%= editingPage.contents%>">
+                <input type="text" name = "contents" value="<%= editingPage[0].contents%>">
             </li>
             <li>
                 <label>비밀번호</label>
-                <input type="text" value="">
+                <input type="text" name = "password">
             </li>
         </ul>
-        <button type = "submit">수정완료</button>
-        <button type = "submit">삭제하기</button>
+        <button type = "submit" name = "<%= editingPage[0]._id%>">수정완료</button>
+
+        <button type = "submit" formaction = "/api/delete" method = "post" name = "<%= editingPage[0]._id%>">삭제하기</button>
     </form>
 </body>
 </html>

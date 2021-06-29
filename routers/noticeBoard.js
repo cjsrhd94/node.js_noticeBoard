@@ -20,33 +20,29 @@ router.post('/writing', async function(req, res,) {
 });
 
 //글 삭제 api
-router.post('/editing/:id', async function (req, res) {
-    
-    const { id } = req.params;
-    const { password } = req.body;
+router.post('/delete', async function (req, res) {
+    // const { _id, writer, title, contents, password } = req.body;
+    const passwordcheck = req.body.password
+    const postId = Object.keys(req.body)[4]
 
-    const isExist = await noticeBoard.find({ _id:id });
-    if(isExist[0]['password']==password){
-        await noticeBoard.deleteOne({ _id })
-        res.send({ result: "success" })
-    } else {
-        res.send({ result : "failed" })
-    }  
-    res.redirect('/')
+    const targetDelete= await noticeBoard.findOne({_id : postId})
+    if (targetDelete.password == passwordcheck){
+        await noticeBoard.findByIdAndDelete({_id: postId})
+        res.redirect('/')
+    } 
 });
 
 //글 수정 api
-router.post('/editing/:id', async function(req, res) {
-
-    const { id } = req.params;
+router.post('/editing', async function(req, res) {
     const { writer, title, contents, password } = req.body;
+    const passwordcheck = req.body.password //비밀번호 체크해줘야하니깐.
+    const postId = Object.keys(req.body)[4] //해당하는 유니크 아이디값의 자료를 바꿀거니깐.
 
-    const isExist = await noticeBoard.find({ _id:id });
-    if(isExist[0]['password']==password){
-        await noticeBoard.updateOne({ _id }, {$set: { writer, title, contents, writeDate}});
-        res.send()
-    }
-    res.redirect('/')
+    const targetEditing= await noticeBoard.findOne({_id : postId})
+    if (targetEditing.password == passwordcheck){
+        await noticeBoard.updateOne({_id : postId}, { $set: {writer, title, contents, password}});
+        res.redirect('/')
+    } 
 });
 
 

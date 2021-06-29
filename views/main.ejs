@@ -16,9 +16,11 @@
     <% mainList.forEach(post => { %>
         <table border="1">
             <tr>
-                <button type="submit" formaction="/detail" method="get" name ="<%= post._id%>"><%= post.title%></button>
-                <th><%= post.writer%></th>
-                <th><%= post.writeDate%></th>
+                <form action = "/detail" method="get">
+                    <button type="submit" name ="<%= post._id%>"><%= post.title%></button>
+                    <th><%= post.writer%></th>
+                    <th><%= post.writeDate%></th>
+                </form>    
             </tr>
         </table>
     <% }) %>
