@@ -6,25 +6,27 @@
 </head>
 <body>
     <h1>글 작성 페이지</h1>
-    <ul>
-        <li>
-            <label>제목</label>
-            <input type="text">
-        </li>
-        <li>
-            <label>작성자</label>
-            <input type="text">
-        </li>
-        <li>
-            <label>내용</label>
-            <input type="text">
-        </li>
+    <form action = "/api/writing" method="post">
+        <ul>
+            <li>
+                <label>제목</label>
+                <input type="text" name="title">
+            </li>
+            <li>
+                <label>작성자</label>
+                <input type="text" name="writer">
+            </li>
+            <li>
+                <label>내용</label>
+                <input type="text" name="contents">
+            </li>
 
-        <li>
-            <label>비밀번호</label>
-            <input type="text">
-        </li>
-    </ul>
-    <button>작성 완료</button>
+            <li>
+                <label>비밀번호</label>
+                <input type="text" name="password">
+            </li>
+        </ul>
+        <button type = "submit">작성 완료</button>
+    </form>
 </body>
 </html>

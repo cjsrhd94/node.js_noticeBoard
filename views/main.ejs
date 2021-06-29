@@ -13,7 +13,15 @@
             <th>작성일</th>
         </tr>
     </table>
-    <tr>
+    <% mainList.forEach(post => { %>
+        <table border="1">
+            <tr>
+                <button type="submit" formaction="/detail" method="get" name ="<%= post._id%>"><%= post.title%></button>
+                <th><%= post.writer%></th>
+                <th><%= post.writeDate%></th>
+            </tr>
+        </table>
+    <% }) %>
         <td colspan="6">
             <button onclick="location.href = '/writing'">글쓰기</button>
         </td>
