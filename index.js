@@ -18,28 +18,25 @@ app.use('/api',[noticeBoardRouter]);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-
+//전체 조회 페이지 불러오기
 app.get('/', async (req, res) =>{
     const mainList = await noticeBoard.find().sort({writeDate: 'descending'})
     res.render('main', {mainList})
-    // console.log(mainList)
 })
 
+//상세 조회 페이지 불러오기
 app.get('/detail', async (req, res) =>{
     const detailPage = await noticeBoard.find({_id : Object.keys(req.query)[0]})
     res.render('detail', {detailPage})
-    // console.log(detailPage)
-    // console.log(Object.keys(req.query)[0])
 })
 
+//수정 페이지 불러오기
 app.get('/editing', async(req, res) =>{
     const editingPage = await noticeBoard.find({_id : Object.keys(req.query)[0]})
     res.render('editing', {editingPage})
-    // const editingPage = await noticeBoard.findOne({_id:req.params.id})
-    // res.render('editing', {editingPage})
-    // console.log(editingPage)
 })
 
+//작성하기 불러오기
 app.get('/writing', (req, res) =>{
     res.render('writing')
 })

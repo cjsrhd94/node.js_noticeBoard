@@ -3,17 +3,9 @@ const noticeBoard = require("../schemas/noticeBoard");
 const url = require('url');
 const router = express.Router();
 
-// router.get('/main', function(req, res, next) {
-//     res.send('전체 조회 api')
-// });
-
-// router.get('/detail', function(req, res, next) {
-//     res.send('상세 페이지 조회 api')
-// });
-
+// 글 작성 api
 router.post('/writing', async function(req, res,) {
     const { writer, title, contents, password } = req.body;
-    // const noticeBoard = require("../schemas/noticeBoard");
     const posting = await noticeBoard.create({ writer, title, contents, password }); //db의 noticeBoard에다가.
     res.redirect('/')
     console.log(posting)
@@ -35,7 +27,7 @@ router.post('/delete', async function (req, res) {
 //글 수정 api
 router.post('/editing', async function(req, res) {
     const { writer, title, contents, password } = req.body;
-    const passwordcheck = req.body.password //비밀번호 체크해줘야하니깐.
+    const passwordcheck = req.body.password //비밀번호 체크
     const postId = Object.keys(req.body)[4] //해당하는 유니크 아이디값의 자료를 바꿀거니깐.
 
     const targetEditing= await noticeBoard.findOne({_id : postId})
@@ -44,6 +36,5 @@ router.post('/editing', async function(req, res) {
         res.redirect('/')
     } 
 });
-
 
 module.exports = router;
